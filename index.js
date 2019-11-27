@@ -46,7 +46,7 @@ exports.peek = (...args) => {
 
 exports.go = (...args) => {
   // @ts-ignore
-  return pipe(...args.slice(1))(args[0])
+  return R.pipe(...args.slice(1))(args[0])
 }
 
 exports.constant = (value) => {
