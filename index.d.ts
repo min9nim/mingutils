@@ -4,7 +4,10 @@ declare module '@mgsong/min-utils' {
     pred1: (arg: any) => boolean,
     pred2: (arg: any) => boolean,
   ): (arg: any) => boolean
-  export const AND: any
+  export function AND(
+    pred1: (arg: any) => boolean,
+    pred2: (arg: any) => boolean,
+  ): (arg: any) => boolean
   export const exclude: any
   export const isNotNil: any
   export const highlight: any
