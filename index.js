@@ -89,7 +89,7 @@ exports.updateById = R.curry((id, tobe, list) => {
   return R.updateBy(exports.idEqual(id))(tobe)(list)
 })
 
-exports.removeById = curry((id, list) => {
+exports.removeById = R.curry((id, list) => {
   return exports.removeBy(exports.idEqual(id))(list)
 })
 
@@ -99,6 +99,8 @@ exports.removeById = curry((id, list) => {
  * */
 exports.addLink = R.replace(/\[(.+)\]\(([^()]+)\)/g)('<a href="$2">$1</a>')
 
+exports.flatLog = (...args) => {
+  const serialized = args.map((arg) => {
     if(typeof arg === 'object'){
       return JSON.stringify(arg, null, 2)
     }else if(typeof arg === 'function'){
