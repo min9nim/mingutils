@@ -178,13 +178,13 @@ exports.blinkDomElement = (dom) => {
 
 
 
-exports.setAwait(timeout: number) {
+exports.setAwait = (timeout) => {
   return new Promise((resolve) => {
     setTimeout(resolve, timeout)
   })
 }
 
-exports.esModule = (_module: any) => {
+exports.esModule = (_module) => {
   return _module.default || _module
 }
 
