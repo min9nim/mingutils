@@ -141,6 +141,12 @@ exports.appendQueryParams = (paramObj) => {
   return assignQueryParams(location.href)(paramObj)
 }
 
+exports.assignQueryParams = (url) => {
+  return (paramObj) => {
+    setQueryParams(Object.assign([], getQueryParams(url), paramObj))
+  }
+}
+
 exports.copyToClipboard = (val) => {
   let t = document.createElement('textarea')
   document.body.appendChild(t)
@@ -169,3 +175,129 @@ exports.blinkDomElement = (dom) => {
     dom.style.border = ''
   }, TIMEOUT)
 }
+
+
+
+exports.setAwait(timeout: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout)
+  })
+}
+
+exports.esModule = (_module: any) => {
+  return _module.default || _module
+}
+
+exports.removeExt = (file) => {
+  return file.replace(/\.(\w*)$/, '')
+}
+
+exports.getFileName = (path, ext = false) => {
+  const getFileNameRegex = /[^\\/]+\.[^\\/]+$/
+  const [file = null] = path.match(getFileNameRegex) || []
+  const name = file || path
+  return ext ? name : removeExt(name)
+}
+
+exports.nl2br = (str) => {
+  if(!str){
+    return ''
+  }
+  return str.replace(/\r\n|\n/g, '<br />')
+}
+
+exports.createRandomString = (length = 5) => {
+  let text = ''
+  // noinspection SpellCheckingInspection
+  const possible =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+  Array.from(Array(length)).forEach(() => {
+    text += possible.charAt(Math.floor(Math.random() * possible.length))
+  })
+  return text
+}
+
+exports.getQueryParams = (url) => {
+  const params = {}
+  const idx = url.indexOf('?') + 1
+  const fromIdx = url.slice(idx)
+  // @ts-ignore
+  fromIdx.replace(/([^(?|#)=&]+)(=([^&]*))?/g, ($0, $1, $2, $3) => {
+    params[$1] = $3
+  })
+  // console.log(params)
+  return params
+}
+
+exports.setQueryParams = (paramObj) => {
+  const params = Object.entries(paramObj)
+    .map(([key, value]) => {
+      let valueStr = value
+      if(Array.isArray(value)){
+        valueStr = value.join(',')
+      }
+      return key + '=' + valueStr
+    })
+    .join('&')
+  // console.log(params)
+  window.history.pushState({}, '', '?' + params)
+}
+
+exports.assignQueryParams = (url) => {
+  return (paramObj) => {
+    setQueryParams(Object.assign([], getQueryParams(url), paramObj))
+  }
+}
+
+exports.delay = (fn, ms) => {
+  return new Promise((resolve) => {
+    const timeout = setTimeout(() => {
+      fn()
+      resolve(timeout)
+    }, ms)
+  })
+}
+
+exports.onlyNumber = (event) => {
+  if(event.keyCode < 48 || event.keyCode > 57){
+    event.returnValue = false
+  }
+}
+
+exports.numberWithCommas = (num) => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
+exports.enableUrl = (str) => {
+  if(!str){
+    return ''
+  }
+  const isUrl = /((?:http|https?|ftps?|sftp):\/\/(?:[a-z0-9-]+\.)+[a-z0-9]{2,4}\S*)/gi
+  if(isUrl.test(str)){
+    return str.replace(isUrl, '<a href="$1">$1</a>')
+  }
+  const wwwStart = /(www\.(?:[a-z0-9-]+\.)+[a-z0-9]{2,4}\S*)/gi
+  if(wwwStart.test(str)){
+    return str.replace(wwwStart, '<a href="http://$1">$1</a>')
+  }
+  return str
+}
+
+exports.removeTypeName = (obj) => {
+  if(!obj || typeof obj !== 'object'){
+    return
+  }
+
+  const keys = Object.keys(obj)
+  keys.forEach((key) => {
+    if(typeof obj[key] && typeof obj[key] === 'object'){
+      removeTypeName(obj[key])
+    }
+
+    if(key === '__typename'){
+      delete obj.__typename
+    }
+  })
+}
+
