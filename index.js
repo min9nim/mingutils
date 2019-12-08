@@ -246,7 +246,7 @@ exports.setQueryParams = (paramObj) => {
 
 exports.assignQueryParams = (url) => {
   return (paramObj) => {
-    setQueryParams(Object.assign([], getQueryParams(url), paramObj))
+    setQueryParams(Object.assign({}, getQueryParams(url), paramObj))
   }
 }
 
@@ -282,22 +282,5 @@ exports.enableUrl = (str) => {
     return str.replace(wwwStart, '<a href="http://$1">$1</a>')
   }
   return str
-}
-
-exports.removeTypeName = (obj) => {
-  if(!obj || typeof obj !== 'object'){
-    return
-  }
-
-  const keys = Object.keys(obj)
-  keys.forEach((key) => {
-    if(typeof obj[key] && typeof obj[key] === 'object'){
-      removeTypeName(obj[key])
-    }
-
-    if(key === '__typename'){
-      delete obj.__typename
-    }
-  })
 }
 
