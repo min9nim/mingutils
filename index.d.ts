@@ -31,4 +31,5 @@ declare module '@mgsong/min-utils' {
   export const appendQueryParams: any
   export const copyToClipboard: any
   export const blinkDomElement: any
+  export const getQueryParams: (url: string) => any
 }
