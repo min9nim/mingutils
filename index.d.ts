@@ -32,4 +32,5 @@ declare module '@mgsong/min-utils' {
   export const copyToClipboard: any
   export const blinkDomElement: any
   export const getQueryParams: (url: string) => {[key: string]: string}
+  export const nl2br: (str: string) => string
 }
