@@ -1,43 +1,40 @@
-const R = require('ramda');
+const R = require('ramda')
 
 exports.OR = (pred1, pred2) => {
-  return (value) => R.or(pred1(value), pred2(value))
+  return value => R.or(pred1(value), pred2(value))
 }
 
 exports.AND = (pred1, pred2) => {
-  return (value) => R.and(pred1(value), pred2(value))
+  return value => R.and(pred1(value), pred2(value))
 }
 
-exports.exclude = R.pipe(
-  R.complement,
-  R.filter,
-)
+exports.exclude = R.pipe(R.complement, R.filter)
 
 exports.isNotNil = R.complement(R.isNil)
 
 exports.highlight = (word, HIGHLIGHT_DELIMETER = ' ') => {
-  return (str) => {
-    if(!word){
+  return str => {
+    if (!word) {
       return str
     }
     const regStr = word
       .split(HIGHLIGHT_DELIMETER)
-      .filter((word) => word !== '')
+      .filter(word => word !== '')
       .join('|')
     const reg = new RegExp(`(${regStr})`, 'gi')
     return str.replace(reg, '<mark>$1</mark>')
   }
 }
 
-exports.removeTag = (html) => {
-  if(html === undefined){
+exports.removeTag = html => {
+  if (html === undefined) {
     return ''
   }
   return html.replace(/(<([^>]+)>)/gi, '')
 }
 
 exports.peek = (...args) => {
-  return (value) => {
+  return value => {
     // console.log('peek called')
     console.log(...args, value) // eslint-disable-line
     return value
@@ -49,15 +46,15 @@ exports.go = (...args) => {
   return R.pipe(...args.slice(1))(args[0])
 }
 
-exports.constant = (value) => {
+exports.constant = value => {
   return () => value
 }
 
 exports.noop = () => {}
 
 exports.indexMap = (...args) => {
-  if(args.length === 1){
-    return (list) => {
+  if (args.length === 1) {
+    return list => {
       Array.prototype.map.call(list, args[0])
     }
   }
@@ -66,20 +63,17 @@ exports.indexMap = (...args) => {
 
 exports.idEqual = R.propEq('_id')
 
-exports.findById = R.pipe(
-  exports.idEqual,
-  R.find,
-)
+exports.findById = R.pipe(exports.idEqual, R.find)
 
 exports.updateBy = R.curry((pred, tobe) => {
-  return (list) => {
+  return list => {
     const index = R.findIndex(pred)(list)
     return R.update(index, tobe)(list)
   }
 })
 
-exports.removeBy = (pred) => {
-  return (list) => {
+exports.removeBy = pred => {
+  return list => {
     const index = R.findIndex(pred)(list)
     return R.remove(index, 1)(list)
   }
@@ -100,10 +94,10 @@ exports.removeById = R.curry((id, list) => {
 exports.addLink = R.replace(/\[(.+)\]\(([^()]+)\)/g)('<a href="$2">$1</a>')
 
 exports.flatLog = (...args) => {
-  const serialized = args.map((arg) => {
-    if(typeof arg === 'object'){
+  const serialized = args.map(arg => {
+    if (typeof arg === 'object') {
       return JSON.stringify(arg, null, 2)
-    }else if(typeof arg === 'function'){
+    } else if (typeof arg === 'function') {
       return arg.toString()
     }
     return arg
@@ -126,28 +120,28 @@ exports.download = async ({uri, name}) => {
   exports.forceFileDownload(blob, name)
 }
 
-exports.getHostname = (url) => {
+exports.getHostname = url => {
   let start = url.indexOf('://') + 3
   let end = url.indexOf('/', start)
   return url.slice(start, end)
 }
 
-exports.getProtocol = (url) => {
+exports.getProtocol = url => {
   let end = url.indexOf('://') + 3
   return url.slice(0, end)
 }
 
-exports.appendQueryParams = (paramObj) => {
+exports.appendQueryParams = paramObj => {
   return assignQueryParams(location.href)(paramObj)
 }
 
-exports.assignQueryParams = (url) => {
-  return (paramObj) => {
+exports.assignQueryParams = url => {
+  return paramObj => {
     setQueryParams(Object.assign([], getQueryParams(url), paramObj))
   }
 }
 
-exports.copyToClipboard = (val) => {
+exports.copyToClipboard = val => {
   let t = document.createElement('textarea')
   document.body.appendChild(t)
   t.value = val
@@ -156,11 +150,11 @@ exports.copyToClipboard = (val) => {
   document.body.removeChild(t)
 }
 
-exports.blinkDomElement = (dom) => {
+exports.blinkDomElement = dom => {
   const BORDER_STYLE = '1px solid red'
   const INTERVAL = 500
   const TIMEOUT = 3000
-  if(!dom){
+  if (!dom) {
     console.warn('[blinkDomElement] Not found blink dom')
     return
   }
@@ -176,19 +170,17 @@ exports.blinkDomElement = (dom) => {
   }, TIMEOUT)
 }
 
-
-
-exports.setAwait = (timeout) => {
-  return new Promise((resolve) => {
+exports.timer = timeout => {
+  return new Promise(resolve => {
     setTimeout(resolve, timeout)
   })
 }
 
-exports.esModule = (_module) => {
+exports.esModule = _module => {
   return _module.default || _module
 }
 
-exports.removeExt = (file) => {
+exports.removeExt = file => {
   return file.replace(/\.(\w*)$/, '')
 }
 
@@ -199,8 +191,8 @@ exports.getFileName = (path, ext = false) => {
   return ext ? name : removeExt(name)
 }
 
-exports.nl2br = (str) => {
-  if(!str){
+exports.nl2br = str => {
+  if (!str) {
     return ''
   }
   return str.replace(/\r\n|\n/g, '<br />')
@@ -209,8 +201,7 @@ exports.nl2br = (str) => {
 exports.createRandomString = (length = 5) => {
   let text = ''
   // noinspection SpellCheckingInspection
-  const possible =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
   Array.from(Array(length)).forEach(() => {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
@@ -218,7 +209,7 @@ exports.createRandomString = (length = 5) => {
   return text
 }
 
-exports.getQueryParams = (url) => {
+exports.getQueryParams = url => {
   const params = {}
   const idx = url.indexOf('?') + 1
   const fromIdx = url.slice(idx)
@@ -230,11 +221,11 @@ exports.getQueryParams = (url) => {
   return params
 }
 
-exports.setQueryParams = (paramObj) => {
+exports.setQueryParams = paramObj => {
   const params = Object.entries(paramObj)
     .map(([key, value]) => {
       let valueStr = value
-      if(Array.isArray(value)){
+      if (Array.isArray(value)) {
         valueStr = value.join(',')
       }
       return key + '=' + valueStr
@@ -244,14 +235,14 @@ exports.setQueryParams = (paramObj) => {
   window.history.pushState({}, '', '?' + params)
 }
 
-exports.assignQueryParams = (url) => {
-  return (paramObj) => {
+exports.assignQueryParams = url => {
+  return paramObj => {
     setQueryParams(Object.assign({}, getQueryParams(url), paramObj))
   }
 }
 
 exports.delay = (fn, ms) => {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const timeout = setTimeout(() => {
       fn()
       resolve(timeout)
@@ -259,28 +250,27 @@ exports.delay = (fn, ms) => {
   })
 }
 
-exports.onlyNumber = (event) => {
-  if(event.keyCode < 48 || event.keyCode > 57){
+exports.onlyNumber = event => {
+  if (event.keyCode < 48 || event.keyCode > 57) {
     event.returnValue = false
   }
 }
 
-exports.numberWithCommas = (num) => {
+exports.numberWithCommas = num => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
-exports.enableUrl = (str) => {
-  if(!str){
+exports.enableUrl = str => {
+  if (!str) {
     return ''
   }
   const isUrl = /((?:http|https?|ftps?|sftp):\/\/(?:[a-z0-9-]+\.)+[a-z0-9]{2,4}\S*)/gi
-  if(isUrl.test(str)){
+  if (isUrl.test(str)) {
     return str.replace(isUrl, '<a href="$1">$1</a>')
   }
   const wwwStart = /(www\.(?:[a-z0-9-]+\.)+[a-z0-9]{2,4}\S*)/gi
-  if(wwwStart.test(str)){
+  if (wwwStart.test(str)) {
     return str.replace(wwwStart, '<a href="http://$1">$1</a>')
   }
   return str
 }
-
