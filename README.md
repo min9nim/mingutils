@@ -1,4 +1,4 @@
-# minguutils
+# mingutils
 
 MINi Good utils
 
