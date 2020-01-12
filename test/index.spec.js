@@ -1,4 +1,12 @@
-const {OR, AND, getQueryParams, createRandomString, numberWithCommas} = require('../src')
+const {
+  OR,
+  AND,
+  getQueryParams,
+  createRandomString,
+  numberWithCommas,
+  exclude,
+  isNotNil,
+} = require('../src')
 const {expect} = require('chai')
 
 describe('test', () => {
@@ -41,5 +49,19 @@ describe('test', () => {
 
   it('numberWithCommas', () => {
     expect(numberWithCommas(1234567)).to.be.equal('1,234,567')
+  })
+
+  it('exclude', () => {
+    const arr = [1, 2, 3, 4, 5, 6]
+    const isEven = num => num % 2 === 0
+    expect(exclude(isEven)(arr)).to.be.deep.equal([1, 3, 5])
+  })
+
+  it('isNotNil', () => {
+    expect(isNotNil(undefined)).to.be.equal(false)
+    expect(isNotNil(null)).to.be.equal(false)
+    expect(isNotNil(0)).to.be.equal(true)
+    expect(isNotNil('')).to.be.equal(true)
+    expect(isNotNil(NaN)).to.be.equal(true)
   })
 })

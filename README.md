@@ -9,8 +9,7 @@ MINi Good utils
 ```javascript
 // ex) http://www.11st.co.kr/product/SellerProductDetail.tmall?method=getSellerProductDetail&prdNo=2228972569&trTypeCd=22&trCtgrNo=895019
 
-const queryParam = getQueryParams(window.location.href)
-console.log(queryParam)
+getQueryParams(window.location.href)
 /*
 {
     method: "getSellerProductDetail",
@@ -26,8 +25,7 @@ console.log(queryParam)
 ### setQueryParams
 
 ```javascript
-setQueryParams({ id: 123, value: "blabla" })
-// https://blabla.com?id=123&value=blabla
+setQueryParams({id: 123, value: 'blabla'}) // window.location.href will be 'https://blabla.com?id=123&value=blabla'
 ```
 
 <br>
@@ -35,8 +33,7 @@ setQueryParams({ id: 123, value: "blabla" })
 ### numberWithCommas
 
 ```javascript
-console.log(numberWithCommas(123456))
-// 123,456
+numberWithCommas(123456 // 123,456
 ```
 
 <br>
@@ -44,11 +41,8 @@ console.log(numberWithCommas(123456))
 ### enableUrl
 
 ```javascript
-const str = "hello google http://google.com"
-console.log(enableUrl(str))
-/*
-hello google <a href="http://google.com">http://google.com</a>
-*/
+const str = 'hello google http://google.com'
+enableUrl(str) // hello google <a href="http://google.com">http://google.com</a>
 ```
 
 <br>
@@ -65,7 +59,7 @@ hello google <a href="http://google.com">http://google.com</a>
 
 ```javascript
 const html = '<pre class="editor">some text</pre>'
-removeTag(html) // return 'some text'
+removeTag(html) // 'some text'
 ```
 
 <br>
@@ -73,7 +67,7 @@ removeTag(html) // return 'some text'
 ### highlight
 
 ```javascript
-highlight("hello")("hello world") // return "<mark>hello</mark> world"
+highlight('hello')('hello world') // '<mark>hello</mark> world'
 ```
 
 <br>
@@ -84,9 +78,9 @@ highlight("hello")("hello world") // return "<mark>hello</mark> world"
 const isPositive = num => num > 0
 const isZero = num => num === 0
 const isZeroOrPositive = OR(isPositive, isZero)
-isZeroOrPositive(1) // return true
-isZeroOrPositive(0) // return true
-isZeroOrPositive(-1) // return false
+isZeroOrPositive(1) // true
+isZeroOrPositive(0) // true
+isZeroOrPositive(-1) // false
 ```
 
 <br>
@@ -97,7 +91,31 @@ isZeroOrPositive(-1) // return false
 const isPositive = num => num > 0
 const isEven = num => num % 2 === 0
 const isEvenAndPositive = AND(isPositive, isEven)
-isEvenAndPositive(2) // return true
-isEvenAndPositive(0) // return false
-isEvenAndPositive(-2) // return false
+isEvenAndPositive(2) // true
+isEvenAndPositive(0) // false
+isEvenAndPositive(-2) // false
+```
+
+<br>
+
+### exclude
+
+```javascript
+const arr = [1, 2, 3, 4, 5, 6]
+const isEven = num => num % 2 === 0
+exclude(isEven)(arr) // [1,3,5]
+```
+
+<br>
+
+### isNotNil
+
+complement of [`R.isNil`](https://ramdajs.com/docs/#isNil)
+
+```javascript
+isNotNil(undefined) // false
+isNotNil(null) // false
+isNotNil(0) // true
+isNotNil('') // true
+isNotNil(NaN) // true
 ```
