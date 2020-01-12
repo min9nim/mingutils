@@ -1,11 +1,11 @@
 {
-  "name": "@mgsong/min-utils",
-  "version": "0.0.13",
+  "name": "mingutils",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/min9nim/min-utils.git"
+    "url": "git+https://github.com/min9nim/mingutils.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
