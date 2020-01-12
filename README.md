@@ -171,5 +171,5 @@ removeExt(filename) // 'index'
 ```javascript
 const filename = '/users/test/index.html'
 getFileName(filename) // 'index'
-getFileName(filename, true)) // 'index.html'
+getFileName(filename, true) // 'index.html'
 ```
