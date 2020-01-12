@@ -2,17 +2,21 @@
   "name": "mingutils",
   "version": "0.0.4",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/min9nim/mingutils.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/**/*.spec.js"
   },
   "author": "min9nim",
   "license": "MIT",
   "dependencies": {
     "ramda": "^0.26.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.0.0"
   }
 }
