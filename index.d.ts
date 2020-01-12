@@ -1,4 +1,4 @@
-declare module '@mgsong/min-utils' {
+declare module 'mingutils' {
   export function findById(_id: string): (list: any[]) => any
   export function OR(
     pred1: (arg: any) => boolean,
@@ -29,6 +29,8 @@ declare module '@mgsong/min-utils' {
   export const getHostname: any
   export const getProtocol: any
   export const appendQueryParams: any
+  export const timer: any
+  export const delay: any
   export const copyToClipboard: any
   export const blinkDomElement: any
   export const getQueryParams: (url: string) => {[key: string]: string}
