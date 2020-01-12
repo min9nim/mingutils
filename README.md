@@ -1,4 +1,8 @@
-# min-utils
+# minguutils
+
+MINi Good utils
+
+<br>
 
 ### getQueryParams
 
@@ -22,7 +26,7 @@ console.log(queryParam)
 ### setQueryParams
 
 ```javascript
-setQueryParams({id: 123, value: 'blabla'})
+setQueryParams({ id: 123, value: "blabla" })
 // https://blabla.com?id=123&value=blabla
 ```
 
@@ -40,7 +44,7 @@ console.log(numberWithCommas(123456))
 ### enableUrl
 
 ```javascript
-const str = 'hello google http://google.com'
+const str = "hello google http://google.com"
 console.log(enableUrl(str))
 /*
 hello google <a href="http://google.com">http://google.com</a>
@@ -69,7 +73,7 @@ removeTag(html) // return 'some text'
 ### highlight
 
 ```javascript
-highlight('hello')('hello world') // return "<mark>hello</mark> world"
+highlight("hello")("hello world") // return "<mark>hello</mark> world"
 ```
 
 <br>
