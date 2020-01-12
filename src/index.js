@@ -179,10 +179,10 @@ exports.timer = timeout => {
 exports.esModule = _module => {
   return _module.default || _module
 }
-
-exports.removeExt = file => {
-  return file.replace(/\.(\w*)$/, '')
+function removeExt(filename) {
+  return filename.replace(/\.(\w*)$/, '')
 }
+exports.removeExt = removeExt
 
 exports.getFileName = (path, ext = false) => {
   const getFileNameRegex = /[^\\/]+\.[^\\/]+$/

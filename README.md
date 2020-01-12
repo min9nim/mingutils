@@ -119,3 +119,57 @@ isNotNil(0) // true
 isNotNil('') // true
 isNotNil(NaN) // true
 ```
+
+<br>
+
+### go
+
+```javascript
+const add5 = num => num + 5
+const mul2 = num => num * 2
+go(1, add5, mul2) // 12
+```
+
+<br>
+
+### nl2br
+
+```javascript
+const str = 'hello\nworld'
+nl2br(str) // 'hello<br />world'
+```
+
+<br>
+
+### timer
+
+```javascript
+await timer(2000) // wait for 2s
+```
+
+<br>
+
+### delay
+
+```javascript
+await delay(fn, 2000) // call fn after 2s
+```
+
+<br>
+
+### removeExt
+
+```javascript
+const filename = 'index.html'
+removeExt(filename) // 'index'
+```
+
+<br>
+
+### getFileName
+
+```javascript
+const filename = '/users/test/index.html'
+getFileName(filename) // 'index'
+getFileName(filename, true)) // 'index.html'
+```

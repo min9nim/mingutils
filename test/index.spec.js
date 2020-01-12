@@ -4,8 +4,16 @@ const {
   getQueryParams,
   createRandomString,
   numberWithCommas,
+  removeExt,
+  delay,
+  timer,
+  removeTag,
+  enableUrl,
+  getFileName,
   exclude,
+  go,
   isNotNil,
+  nl2br,
 } = require('../src')
 const {expect} = require('chai')
 
@@ -63,5 +71,51 @@ describe('test', () => {
     expect(isNotNil(0)).to.be.equal(true)
     expect(isNotNil('')).to.be.equal(true)
     expect(isNotNil(NaN)).to.be.equal(true)
+  })
+
+  it('go', () => {
+    const add5 = num => num + 5
+    const mul2 = num => num * 2
+    const result = go(1, add5, mul2)
+    expect(result).to.be.equal(12)
+  })
+
+  it('nl2br', () => {
+    const str = 'hello\nworld'
+    expect(nl2br(str)).to.be.equal('hello<br />world')
+  })
+
+  it('enableUrl', () => {
+    const str = 'hello google http://google.com'
+    expect(enableUrl(str)).to.be.equal(
+      'hello google <a href="http://google.com">http://google.com</a>',
+    )
+  })
+
+  it('removeExt', () => {
+    const filename = 'index.html'
+    expect(removeExt(filename)).to.be.equal('index')
+  })
+
+  it('getFileName', () => {
+    const filename = '/users/test/index.html'
+    expect(getFileName(filename)).to.be.equal('index')
+    expect(getFileName(filename, true)).to.be.equal('index.html')
+  })
+
+  it('timer & delay', async () => {
+    let cnt = 0
+    const add1 = () => {
+      cnt++
+    }
+    delay(add1, 10)
+    expect(cnt).to.be.equal(0)
+    await timer(10)
+    expect(cnt).to.be.equal(1)
+  })
+
+  it('removeTag', () => {
+    const html = '<pre class="editor">some text</pre>'
+    expect(removeTag(html)).to.be.equal('some text')
   })
 })
