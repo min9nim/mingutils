@@ -173,3 +173,12 @@ const filename = '/users/test/index.html'
 getFileName(filename) // 'index'
 getFileName(filename, true) // 'index.html'
 ```
+
+<br>
+
+### loadJs
+
+```javascript
+await loadJs('https://code.jquery.com/jquery-3.4.1.min.js') // browser only
+console.log(jQuery().jquery) // "3.4.1"
+```
