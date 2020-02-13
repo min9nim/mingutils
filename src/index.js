@@ -287,3 +287,12 @@ exports.loadJs = src => {
     headTag.appendChild(newScript)
   })
 }
+
+exports.sortKeys = (obj, pred) => {
+  const keys = Object.keys(obj)
+  const sorted = {}
+  keys.sort(pred).forEach(key => {
+    sorted[key] = obj[key]
+  })
+  return sorted
+}

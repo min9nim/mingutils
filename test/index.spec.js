@@ -14,8 +14,10 @@ const {
   go,
   isNotNil,
   nl2br,
+  sortKeys,
 } = require('../src')
 const {expect} = require('chai')
+const {descend, identity} = require('ramda')
 
 describe('test', () => {
   it('OR', () => {
@@ -117,5 +119,15 @@ describe('test', () => {
   it('removeTag', () => {
     const html = '<pre class="editor">some text</pre>'
     expect(removeTag(html)).to.be.equal('some text')
+  })
+
+  it('sortKeys', () => {
+    const obj = {b: 1, a: 1, c: 1}
+    const sorted = sortKeys(obj)
+    expect(Object.keys(sorted)).to.be.deep.equal(Object.keys({a: 1, b: 1, c: 1}))
+    const reversed = sortKeys(obj, descend(identity))
+    expect(Object.keys(reversed)).to.be.deep.equal(Object.keys({c: 1, b: 1, a: 1}))
+    const reversed2 = sortKeys(obj, (a, b) => (a < b ? 1 : -1))
+    expect(Object.keys(reversed2)).to.be.deep.equal(Object.keys({c: 1, b: 1, a: 1}))
   })
 })

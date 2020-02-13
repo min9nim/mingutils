@@ -184,3 +184,15 @@ getFileName(filename, true) // 'index.html'
 await loadJs('https://code.jquery.com/jquery-3.4.1.min.js') // browser only
 console.log(jQuery().jquery) // "3.4.1"
 ```
+
+<br>
+
+### sortKeys
+
+```javascript
+import {descend, identity} from 'ramda'
+
+const obj = {b: 1, a: 1, c: 1}
+const sorted = sortKeys(obj) // {a: 1, b: 1, c: 1}
+const reversed = sortKeys(obj, (a, b) => (a < b ? 1 : -1)) // {c: 1, b: 1, a: 1}
+```
