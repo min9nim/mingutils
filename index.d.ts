@@ -35,5 +35,6 @@ declare module 'mingutils' {
   export const blinkDomElement: any
   export const getQueryParams: (url: string) => {[key: string]: string}
   export const nl2br: (str: string) => string
-  export const loadJs: (str: string) => Prommise<void>
+  export const loadJs: (str: string) => Promise<void>
+  export const sortKeys: any
 }
