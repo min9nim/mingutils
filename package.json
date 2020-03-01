@@ -5,15 +5,14 @@
   "keywords": [
     "utils"
   ],
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/min9nim/mingutils.git"
   },
   "scripts": {
     "build": "tsc -p tsconfig.prod.json --declaration --outDir dist",
-    "test": "mocha -r ts-node/register test/**/*.spec.ts",
-    "test:js": "mocha test/**/*.spec.js"
+    "test": "mocha -r ts-node/register test/**/*.spec.ts"
   },
   "author": "min9nim",
   "license": "MIT",

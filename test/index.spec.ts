@@ -1,4 +1,4 @@
-const {
+import {
   OR,
   AND,
   getQueryParams,
@@ -15,9 +15,9 @@ const {
   isNotNil,
   nl2br,
   sortKeys,
-} = require('../src')
-const {expect} = require('chai')
-const {descend, identity} = require('ramda')
+} from '../src'
+import {expect} from 'chai'
+import {descend, identity} from 'ramda'
 
 describe('test', () => {
   it('OR', () => {

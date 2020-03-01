@@ -301,7 +301,7 @@ export const loadJs = src => {
   })
 }
 
-export const sortKeys = (obj, pred) => {
+export const sortKeys = (obj: any, pred?: any) => {
   const keys = Object.keys(obj)
   const sorted = {}
   keys.sort(pred).forEach(key => {
