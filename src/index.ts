@@ -126,7 +126,7 @@ export const flatLog = (...args) => {
   console.log(...serialized)
 }
 
-export const forceFileDownload = (blob, name) => {
+export const forceFileDownload = (blob, name: string) => {
   const url = window.URL.createObjectURL(blob)
   const link = document.createElement('a')
   link.href = url
@@ -140,18 +140,18 @@ export const download = async ({uri, name}) => {
   forceFileDownload(blob, name)
 }
 
-export const getHostname = url => {
+export const getHostname = (url: string) => {
   let start = url.indexOf('://') + 3
   let end = url.indexOf('/', start)
   return url.slice(start, end)
 }
 
-export const getProtocol = url => {
+export const getProtocol = (url: string) => {
   let end = url.indexOf('://') + 3
   return url.slice(0, end)
 }
 
-export const assignQueryParams = url => {
+export const assignQueryParams = (url: string) => {
   return paramObj => {
     setQueryParams(Object.assign([], getQueryParams(url), paramObj))
   }
@@ -190,7 +190,7 @@ export const blinkDomElement = dom => {
   }, TIMEOUT)
 }
 
-export const timer = timeout => {
+export const timer = (timeout: number) => {
   return new Promise(resolve => {
     setTimeout(resolve, timeout)
   })
@@ -203,21 +203,21 @@ export function removeExt(filename) {
   return filename.replace(/\.(\w*)$/, '')
 }
 
-export const getFileName = (path, ext = false) => {
+export const getFileName = (path: string, ext = false) => {
   const getFileNameRegex = /[^\\/]+\.[^\\/]+$/
   const [file = null] = path.match(getFileNameRegex) || []
   const name = file || path
   return ext ? name : removeExt(name)
 }
 
-export const nl2br = str => {
+export const nl2br = (str: string) => {
   if (!str) {
     return ''
   }
   return str.replace(/\r\n|\n/g, '<br />')
 }
 
-export const createRandomString = (length = 5) => {
+export const createRandomString = (length = 5): string => {
   let text = ''
   // noinspection SpellCheckingInspection
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -228,14 +228,14 @@ export const createRandomString = (length = 5) => {
   return text
 }
 
-export const getQueryParams = url => {
-  const params = {}
+export const getQueryParams = (url: string) => {
+  const params: any = {}
   const idx = url.indexOf('?') + 1
   const fromIdx = url.slice(idx)
+  // @ts-ignore
   fromIdx.replace(/([^(?|#)=&]+)(=([^&]*))?/g, ($0, $1, $2, $3) => {
     params[$1] = $3
   })
-  // console.log(params)
   return params
 }
 
@@ -253,7 +253,7 @@ export const setQueryParams = paramObj => {
   window.history.pushState({}, '', '?' + params)
 }
 
-export const delay = (fn, ms) => {
+export const delay = (fn, ms: number) => {
   return new Promise(resolve => {
     const timeout = setTimeout(() => {
       fn()
@@ -268,11 +268,11 @@ export const onlyNumber = event => {
   }
 }
 
-export const numberWithCommas = num => {
+export const numberWithCommas = (num: number) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
-export const enableUrl = str => {
+export const enableUrl = (str: string): string => {
   if (!str) {
     return ''
   }
@@ -287,7 +287,7 @@ export const enableUrl = str => {
   return str
 }
 
-export const loadJs = src => {
+export const loadJs = (src: string) => {
   return new Promise(resolve => {
     const headTag = document.getElementsByTagName('head')[0]
     const newScript = document.createElement('script')
