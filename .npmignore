@@ -1,0 +1,9 @@
+.github
+git-hooks
+test
+yarn-error.log
+yarn.lock
+tsconfig.json
+tsconfig.prod.json
+publish*.sh
+README.md
