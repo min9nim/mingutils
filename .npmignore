@@ -7,3 +7,4 @@ tsconfig.json
 tsconfig.prod.json
 publish*.sh
 README.md
+.prettierrc
