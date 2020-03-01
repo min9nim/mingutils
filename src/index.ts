@@ -43,7 +43,7 @@ export const highlight = (word, HIGHLIGHT_DELIMETER = ' ') => {
   }
 }
 
-export const removeTag = html => {
+export const removeTag = (html: string): string => {
   if (html === undefined) {
     return ''
   }
@@ -232,7 +232,6 @@ export const getQueryParams = url => {
   const params = {}
   const idx = url.indexOf('?') + 1
   const fromIdx = url.slice(idx)
-  // @ts-ignore
   fromIdx.replace(/([^(?|#)=&]+)(=([^&]*))?/g, ($0, $1, $2, $3) => {
     params[$1] = $3
   })
