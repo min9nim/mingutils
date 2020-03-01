@@ -104,16 +104,16 @@ export const updateById = curry((id, tobe, list) => {
 })
 
 export const removeById = curry((id, list) => {
-  return exports.removeBy(exports.idEqual(id))(list)
+  return removeBy(idEqual(id))(list)
 })
 
 /*
  * 패러미터 문자열 중 아래와 같이 매칭되는 문자열을 변환
  * [제목](링크) => <a href="링크">제목</a>
  * */
-exports.addLink = replace(/\[(.+)\]\(([^()]+)\)/g)('<a href="$2">$1</a>')
+export const addLink = replace(/\[(.+)\]\(([^()]+)\)/g)('<a href="$2">$1</a>')
 
-exports.flatLog = (...args) => {
+export const flatLog = (...args) => {
   const serialized = args.map(arg => {
     if (typeof arg === 'object') {
       return JSON.stringify(arg, null, 2)
@@ -126,7 +126,7 @@ exports.flatLog = (...args) => {
   console.log(...serialized)
 }
 
-exports.forceFileDownload = (blob, name) => {
+export const forceFileDownload = (blob, name) => {
   const url = window.URL.createObjectURL(blob)
   const link = document.createElement('a')
   link.href = url
@@ -134,13 +134,13 @@ exports.forceFileDownload = (blob, name) => {
   link.click()
 }
 
-exports.download = async ({uri, name}) => {
+export const download = async ({uri, name}) => {
   const response = await fetch(uri)
   const blob = await response.blob()
-  exports.forceFileDownload(blob, name)
+  forceFileDownload(blob, name)
 }
 
-exports.getHostname = url => {
+export const getHostname = url => {
   let start = url.indexOf('://') + 3
   let end = url.indexOf('/', start)
   return url.slice(start, end)
