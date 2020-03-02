@@ -15,6 +15,7 @@ import {
   isNotNil,
   nl2br,
   sortKeys,
+  onlyOneInvoke,
 } from '../src'
 import {expect} from 'chai'
 import {descend, identity} from 'ramda'
@@ -129,5 +130,15 @@ describe('test', () => {
     expect(Object.keys(reversed)).to.be.deep.equal(Object.keys({c: 1, b: 1, a: 1}))
     const reversed2 = sortKeys(obj, (a, b) => (a < b ? 1 : -1))
     expect(Object.keys(reversed2)).to.be.deep.equal(Object.keys({c: 1, b: 1, a: 1}))
+  })
+  it('onlyOneInvoke', () => {
+    let cnt = 0
+    const fn = () => {
+      cnt = cnt + 1
+    }
+    const fn2 = onlyOneInvoke(fn)
+    fn2()
+    fn2()
+    expect(cnt).to.be.equal(1)
   })
 })

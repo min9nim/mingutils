@@ -308,3 +308,14 @@ export const sortKeys = (obj: any, pred?: any) => {
   })
   return sorted
 }
+
+export const onlyOneInvoke = fn => {
+  let invoked = false
+  return (...args) => {
+    if (invoked) {
+      return
+    }
+    invoked = true
+    return fn(...args)
+  }
+}
