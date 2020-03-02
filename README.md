@@ -196,3 +196,27 @@ const obj = {b: 1, a: 1, c: 1}
 const sorted = sortKeys(obj) // {a: 1, b: 1, c: 1}
 const reversed = sortKeys(obj, (a, b) => (a < b ? 1 : -1)) // {c: 1, b: 1, a: 1}
 ```
+
+<br>
+
+### onlyOneInvkoe
+
+```javascript
+let cnt = 0
+const fn = () => {
+  cnt = cnt + 1
+}
+const fn2 = onlyOneInvoke(fn)
+fn2() // `cnt` will be 1
+fn2() // skipped
+```
+
+<br>
+
+### createRandomString
+
+> possible character: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+```javascript
+createRandomString(10) // return random string with 10 length
+```
