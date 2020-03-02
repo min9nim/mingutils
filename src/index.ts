@@ -1,31 +1,31 @@
-// import {
-//   or,
-//   and,
-//   filter,
-//   complement,
-//   isNil,
-//   pipe,
-//   propEq,
-//   find,
-//   curry,
-//   findIndex,
-//   update,
-//   remove,
-//   replace,
-// } from 'ramda'
-import or from 'ramda/es/or'
-import and from 'ramda/es/and'
-import filter from 'ramda/es/filter'
-import complement from 'ramda/es/complement'
-import isNil from 'ramda/es/isNil'
-import pipe from 'ramda/es/pipe'
-import propEq from 'ramda/es/propEq'
-import find from 'ramda/es/find'
-import curry from 'ramda/es/curry'
-import findIndex from 'ramda/es/findIndex'
-import update from 'ramda/es/update'
-import remove from 'ramda/es/remove'
-import replace from 'ramda/es/replace'
+import {
+  or,
+  and,
+  filter,
+  complement,
+  isNil,
+  pipe,
+  propEq,
+  find,
+  curry,
+  findIndex,
+  update,
+  remove,
+  replace,
+} from 'ramda'
+// import or from 'ramda/es/or'
+// import and from 'ramda/es/and'
+// import filter from 'ramda/es/filter'
+// import complement from 'ramda/es/complement'
+// import isNil from 'ramda/es/isNil'
+// import pipe from 'ramda/es/pipe'
+// import propEq from 'ramda/es/propEq'
+// import find from 'ramda/es/find'
+// import curry from 'ramda/es/curry'
+// import findIndex from 'ramda/es/findIndex'
+// import update from 'ramda/es/update'
+// import remove from 'ramda/es/remove'
+// import replace from 'ramda/es/replace'
 
 export const OR = (pred1, pred2) => {
   return value => or(pred1(value), pred2(value))
