@@ -52,6 +52,19 @@ describe('test', () => {
     })
   })
 
+  it('getQueryParams when except host', () => {
+    const url =
+      '/product/SellerProductDetail.tmall?method=getSellerProductDetail&prdNo=2228972569&trTypeCd=22&trCtgrNo=895019'
+
+    const queryParam = getQueryParams(url)
+    expect(queryParam).to.be.deep.equal({
+      method: 'getSellerProductDetail',
+      prdNo: '2228972569',
+      trTypeCd: '22',
+      trCtgrNo: '895019',
+    })
+  })
+
   it('createRandomString', () => {
     const str = createRandomString(10)
     expect(str.length).to.be.equal(10)
