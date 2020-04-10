@@ -16,6 +16,7 @@ import {
   nl2br,
   sortKeys,
   onlyOneInvoke,
+  highlight,
 } from '../src'
 import {expect} from 'chai'
 import {descend, identity} from 'ramda'
@@ -153,5 +154,9 @@ describe('test', () => {
     fn2()
     fn2()
     expect(cnt).to.be.equal(1)
+  })
+  it('highlight', () => {
+    expect(highlight('aa')('aabbcc')).to.be.equal('<mark>aa</mark>bbcc')
+    expect(highlight('aa\\')('aa\\bbcc')).to.be.equal('<mark>aa\\</mark>bbcc')
   })
 })

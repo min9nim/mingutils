@@ -220,3 +220,12 @@ fn2() // skipped
 ```javascript
 createRandomString(10) // return random string with 10 length
 ```
+
+<br>
+
+### escapeRegExp
+
+```javascript
+const str = 'hello [world]'
+escapeRegExp(str) // hello \[world\]
+```

@@ -50,6 +50,7 @@ export const highlight = (word, HIGHLIGHT_DELIMETER = ' ') => {
     const regStr = word
       .split(HIGHLIGHT_DELIMETER)
       .filter(word => word !== '')
+      .map(escapeRegExp)
       .join('|')
     const reg = new RegExp(`(${regStr})`, 'gi')
     return str.replace(reg, '<mark>$1</mark>')
@@ -331,4 +332,8 @@ export const onlyOneInvoke = fn => {
     invoked = true
     return fn(...args)
   }
+}
+
+export const escapeRegExp = text => {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\\s]/g, '\\$&')
 }
