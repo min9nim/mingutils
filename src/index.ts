@@ -234,7 +234,7 @@ export const nl2br = (str: string) => {
 export const createRandomString = (length = 5): string => {
   let text = ''
   // noinspection SpellCheckingInspection
-  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_'
 
   Array.from(Array(length)).forEach(() => {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
