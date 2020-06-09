@@ -4,6 +4,30 @@ MINi Good utils
 
 <br>
 
+### Install & Usage
+
+Install
+
+```
+yarn add mingutils
+```
+
+Usage
+
+ES6
+
+```js
+import {getHostName, ...} from 'mingutils'
+```
+
+NodeJS
+
+```js
+const {getHostName, ...} = require('mingutils')
+```
+
+<br>
+
 ### getQueryParams
 
 ```javascript
@@ -26,6 +50,14 @@ getQueryParams(window.location.href)
 
 ```javascript
 setQueryParams({id: 123, value: 'blabla'}) // window.location.href will be 'https://blabla.com?id=123&value=blabla'
+```
+
+<br>
+
+### getHostName
+
+```javascript
+getHostName('https://news.v.daum.net/v/20200610002355321') // 'news.v.daum.net'
 ```
 
 <br>
