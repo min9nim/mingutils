@@ -154,7 +154,7 @@ export const download = async ({uri, name}) => {
   forceFileDownload(blob, name)
 }
 
-export const getHostname = (url: string) => {
+export const getHostname = (url: string = '') => {
   let start = url.indexOf('://') + 3
   let end = url.indexOf('/', start)
   return url.slice(start, end)
