@@ -65,7 +65,7 @@ getHostName('https://news.v.daum.net/v/20200610002355321') // 'news.v.daum.net'
 ### numberWithCommas
 
 ```javascript
-numberWithCommas(123456 // 123,456
+numberWithCommas(123456) // 123,456
 ```
 
 <br>
