@@ -161,7 +161,9 @@ describe('test', () => {
     expect(highlight('aa\\')('aa\\bbcc')).to.be.equal('<mark>aa\\</mark>bbcc')
   })
   it('getHostname', () => {
-    const host = getHostname('https://naver.com')
-    expect(host).to.be.equal('naver.com')
+    expect(getHostname('https://naver.com')).to.be.equal('naver.com')
+    expect(getHostname('https://news.v.daum.net/v/20200613000613325')).to.be.equal(
+      'news.v.daum.net',
+    )
   })
 })

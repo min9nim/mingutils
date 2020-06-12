@@ -13,19 +13,6 @@ import {
   remove,
   replace,
 } from 'ramda'
-// import or from 'ramda/es/or'
-// import and from 'ramda/es/and'
-// import filter from 'ramda/es/filter'
-// import complement from 'ramda/es/complement'
-// import isNil from 'ramda/es/isNil'
-// import pipe from 'ramda/es/pipe'
-// import propEq from 'ramda/es/propEq'
-// import find from 'ramda/es/find'
-// import curry from 'ramda/es/curry'
-// import findIndex from 'ramda/es/findIndex'
-// import update from 'ramda/es/update'
-// import remove from 'ramda/es/remove'
-// import replace from 'ramda/es/replace'
 
 export const OR = (pred1, pred2) => {
   return value => or(pred1(value), pred2(value))
@@ -156,7 +143,8 @@ export const download = async ({uri, name}) => {
 
 export const getHostname = (url: string = '') => {
   let start = url.indexOf('://') + 3
-  let end = url.endsWith('/') ? -1 : url.length
+  const pathStart = url.indexOf('/', start)
+  let end = pathStart === -1 ? url.length : pathStart
   return url.slice(start, end)
 }
 
