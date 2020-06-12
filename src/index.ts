@@ -156,7 +156,7 @@ export const download = async ({uri, name}) => {
 
 export const getHostname = (url: string = '') => {
   let start = url.indexOf('://') + 3
-  let end = url.indexOf('/', start)
+  let end = url.endsWith('/') ? -1 : url.length
   return url.slice(start, end)
 }
 

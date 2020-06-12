@@ -9,6 +9,7 @@ import {
   timer,
   removeTag,
   enableUrl,
+  getHostname,
   getFileName,
   exclude,
   go,
@@ -158,5 +159,9 @@ describe('test', () => {
   it('highlight', () => {
     expect(highlight('aa')('aabbcc')).to.be.equal('<mark>aa</mark>bbcc')
     expect(highlight('aa\\')('aa\\bbcc')).to.be.equal('<mark>aa\\</mark>bbcc')
+  })
+  it('getHostname', () => {
+    const host = getHostname('https://naver.com')
+    expect(host).to.be.equal('naver.com')
   })
 })
