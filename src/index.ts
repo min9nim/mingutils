@@ -1,18 +1,32 @@
-import {
-  or,
-  and,
-  filter,
-  complement,
-  isNil,
-  pipe,
-  propEq,
-  find,
-  curry,
-  findIndex,
-  update,
-  remove,
-  replace,
-} from 'ramda'
+// import {
+//   or,
+//   and,
+//   filter,
+//   complement,
+//   isNil,
+//   pipe,
+//   propEq,
+//   find,
+//   curry,
+//   findIndex,
+//   update,
+//   remove,
+//   replace,
+// } from 'ramda'
+
+import or from 'ramda/src/or'
+import and from 'ramda/src/and'
+import filter from 'ramda/src/filter'
+import complement from 'ramda/src/complement'
+import isNil from 'ramda/src/isNil'
+import pipe from 'ramda/src/pipe'
+import propEq from 'ramda/src/propEq'
+import find from 'ramda/src/find'
+import curry from 'ramda/src/curry'
+import findIndex from 'ramda/src/findIndex'
+import update from 'ramda/src/update'
+import remove from 'ramda/src/remove'
+import replace from 'ramda/src/replace'
 
 export const OR = (pred1, pred2) => {
   return value => or(pred1(value), pred2(value))
