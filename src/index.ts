@@ -68,7 +68,11 @@ export const removeTag = (html: string): string => {
 export const peek = (...args) => {
   return value => {
     // console.log('peek called')
-    console.log(...args, value) // eslint-disable-line
+    if (!args.length) {
+      console.log('peek', value) // eslint-disable-line
+    } else {
+      console.log(...args, value) // eslint-disable-line
+    }
     return value
   }
 }
