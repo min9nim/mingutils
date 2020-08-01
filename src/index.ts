@@ -343,3 +343,7 @@ export const onlyOneInvoke = fn => {
 export const escapeRegExp = text => {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\\s]/g, '\\$&')
 }
+
+export const hasProps = (arr: string[]) => {
+  return (obj: any): boolean => arr.every(prop => obj[prop])
+}
