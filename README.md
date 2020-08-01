@@ -261,3 +261,17 @@ createRandomString(10) // return random string with 10 length
 const str = 'hello [world]'
 escapeRegExp(str) // hello \[world\]
 ```
+
+
+<br>
+
+### hasProps
+
+```javascript
+const obj = { a: 1, b: 2, c: 3 }
+hasProps(['a', 'b', 'c'])(obj)  // true
+hasProps(['a', 'b'])(obj) // true
+hasProps(['c'])(obj) // true
+hasProps(['a', 'b', 'd'])(obj)  // false
+hasProps(['d'])(obj)  // false
+```
