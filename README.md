@@ -1,6 +1,6 @@
 # mingutils
 
-**min**i **g**ood **utils**
+**MIN**i **G**ood **UTILS**
 
 <br>
 
