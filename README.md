@@ -1,6 +1,6 @@
 # mingutils
 
-MINi Good utils
+**min**i **g**ood **utils**
 
 <br>
 
