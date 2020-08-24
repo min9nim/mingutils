@@ -5,7 +5,7 @@
   "keywords": [
     "utils"
   ],
-  "main": "dist/index.js",
+  "main": "./index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/min9nim/mingutils.git"
