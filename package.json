@@ -11,7 +11,7 @@
     "url": "git+https://github.com/min9nim/mingutils.git"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.prod.json --declaration --outDir dist",
+    "build": "tsc -p tsconfig.prod.json --declaration",
     "test": "mocha -r ts-node/register test/**/*.spec.ts"
   },
   "author": "min9nim",

@@ -4,3 +4,7 @@ node_modules
 .vscode
 dist
 yarn.lock
+
+index.d.ts
+index.js
+index.js.map
