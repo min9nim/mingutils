@@ -46,9 +46,16 @@ getQueryParams(window.location.href)
 
 <br>
 
+### queryObjToStr
+```js
+queryObjToStr({a:1, b:2}) // 'a=1&b=2'
+```
+
+<br>
+
 ### setQueryParams
 
-```javascript
+```js
 setQueryParams({id: 123, value: 'blabla'}) // window.location.href will be 'https://blabla.com?id=123&value=blabla'
 ```
 
