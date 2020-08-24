@@ -260,18 +260,18 @@ export const getQueryParams = (url: string) => {
 }
 
 export const setQueryParams = paramObj => {
-  const params = Object.entries(paramObj)
-    .map(([key, value]) => {
-      let valueStr = value
-      if (Array.isArray(value)) {
-        valueStr = value.join(',')
-      }
-      return key + '=' + valueStr
-    })
-    .join('&')
-  // console.log(params)
-  window.history.pushState({}, '', '?' + params)
+  window.history.pushState({}, '', '?' + queryObjToStr(paramObj))
 }
+
+export const queryObjToStr = (paramObj) => Object.entries(paramObj)
+  .map(([key, value]) => {
+    let valueStr = value
+    if (Array.isArray(value)) {
+      valueStr = value.join(',')
+    }
+    return key + '=' + valueStr
+  })
+  .join('&')
 
 export const delay = (fn, ms: number) => {
   return new Promise(resolve => {

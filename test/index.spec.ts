@@ -18,6 +18,7 @@ import {
   sortKeys,
   onlyOneInvoke,
   highlight,
+  queryObjToStr,
 } from '../src'
 import {expect} from 'chai'
 import {descend, identity} from 'ramda'
@@ -165,5 +166,8 @@ describe('test', () => {
     expect(getHostname('https://news.v.daum.net/v/20200613000613325')).to.be.equal(
       'news.v.daum.net',
     )
+  })
+  it('queryObjToStr', () => {
+    expect(queryObjToStr({a:1, b:2})).to.be.equal('a=1&b=2')
   })
 })
