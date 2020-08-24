@@ -263,7 +263,7 @@ export const setQueryParams = paramObj => {
   window.history.pushState({}, '', '?' + queryObjToStr(paramObj))
 }
 
-export const queryObjToStr = (paramObj) => Object.entries(paramObj)
+export const queryObjToStr = (paramObj: any): string => Object.entries(paramObj)
   .map(([key, value]) => {
     let valueStr = value
     if (Array.isArray(value)) {
