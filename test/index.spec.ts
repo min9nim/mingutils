@@ -18,6 +18,7 @@ import {
   sortKeys,
   onlyOneInvoke,
   highlight,
+  hasProps,
   queryObjToStr,
 } from '../src'
 import {expect} from 'chai'
@@ -166,6 +167,14 @@ describe('test', () => {
     expect(getHostname('https://news.v.daum.net/v/20200613000613325')).to.be.equal(
       'news.v.daum.net',
     )
+  })
+  it('hasProps', () => {
+    const obj = { a: 1, b: 2, c: 3 }
+    expect(hasProps(['a', 'b', 'c'])(obj)).to.equal(true)
+    expect(hasProps(['a', 'b'])(obj)).to.equal(true)
+    expect(hasProps(['c'])(obj)).to.equal(true)
+    expect(hasProps(['a', 'b', 'd'])(obj)).to.equal(false)
+    expect(hasProps(['d'])(obj)).to.equal(false)
   })
   it('queryObjToStr', () => {
     expect(queryObjToStr({a:1, b:2})).to.be.equal('a=1&b=2')
