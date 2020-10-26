@@ -265,12 +265,16 @@ export const setQueryParams = paramObj => {
 
 export const queryObjToStr = (paramObj: any): string => Object.entries(paramObj)
   .map(([key, value]) => {
+    if(isNil(value)){
+      return
+    }
     let valueStr = value
     if (Array.isArray(value)) {
       valueStr = value.join(',')
     }
     return key + '=' + valueStr
   })
+  .filter(isNotNil)
   .join('&')
 
 export const delay = (fn, ms: number) => {

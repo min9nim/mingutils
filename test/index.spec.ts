@@ -178,5 +178,7 @@ describe('test', () => {
   })
   it('queryObjToStr', () => {
     expect(queryObjToStr({a:1, b:2})).to.be.equal('a=1&b=2')
+    expect(queryObjToStr({a:1, b: undefined})).to.be.equal('a=1')
+    expect(queryObjToStr({a:1, b: ''})).to.be.equal('a=1&b=')
   })
 })
