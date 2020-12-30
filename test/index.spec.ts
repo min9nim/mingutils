@@ -18,6 +18,7 @@ import {
   sortKeys,
   onlyOneInvoke,
   highlight,
+  oneOf,
   hasProps,
   queryObjToStr,
 } from '../src'
@@ -180,5 +181,22 @@ describe('test', () => {
     expect(queryObjToStr({a:1, b:2})).to.be.equal('a=1&b=2')
     expect(queryObjToStr({a:1, b: undefined})).to.be.equal('a=1')
     expect(queryObjToStr({a:1, b: ''})).to.be.equal('a=1&b=')
+  })
+
+  it('oneOf', () => {
+    expect(oneOf([[true, 2]])).to.be.equal(2)
+    expect(
+      oneOf([
+        [false, 1],
+        [undefined, 2],
+        [true, 3],
+      ]),
+    ).to.be.equal(3)
+    expect(
+      oneOf([
+        [null, 1],
+        [5, 2],
+      ]),
+    ).to.be.equal(2)
   })
 })

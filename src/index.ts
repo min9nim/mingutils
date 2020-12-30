@@ -351,3 +351,5 @@ export const escapeRegExp = text => {
 export const hasProps = (arr: string[]) => {
   return (obj: any): boolean => arr.every(prop => obj[prop])
 }
+
+export const oneOf = conditions => conditions.find(condition => condition[0])[1]
