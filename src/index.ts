@@ -254,7 +254,7 @@ export const getQueryParams = (url: string) => {
   const fromIdx = url.slice(idx)
   // @ts-ignore
   fromIdx.replace(/([^(?|#)=&]+)(=([^&]*))?/g, ($0, $1, $2, $3) => {
-    params[$1] = $3
+    params[$1] = decodeURI($3)
   })
   return params
 }
