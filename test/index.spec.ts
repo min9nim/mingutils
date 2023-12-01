@@ -198,5 +198,12 @@ describe('test', () => {
         [Boolean(5), 2],
       ]),
     ).to.be.equal(2)
+
+    expect(
+      oneOf([
+        [() => Boolean(null), () => 1],
+        [() => Boolean(5), () => 20],
+      ]),
+    ).to.be.equal(20)
   })
 })
