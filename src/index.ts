@@ -14,19 +14,19 @@
 //   replace,
 // } from 'ramda'
 
-import or from 'ramda/src/or'
 import and from 'ramda/src/and'
-import filter from 'ramda/src/filter'
 import complement from 'ramda/src/complement'
+import curry from 'ramda/src/curry'
+import filter from 'ramda/src/filter'
+import find from 'ramda/src/find'
+import findIndex from 'ramda/src/findIndex'
 import isNil from 'ramda/src/isNil'
+import or from 'ramda/src/or'
 import pipe from 'ramda/src/pipe'
 import propEq from 'ramda/src/propEq'
-import find from 'ramda/src/find'
-import curry from 'ramda/src/curry'
-import findIndex from 'ramda/src/findIndex'
-import update from 'ramda/src/update'
 import remove from 'ramda/src/remove'
 import replace from 'ramda/src/replace'
+import update from 'ramda/src/update'
 
 export const OR = (pred1, pred2) => {
   return value => or(pred1(value), pred2(value))
@@ -317,7 +317,7 @@ export const loadJs = (src: string) => {
     const newScript = document.createElement('script')
     newScript.type = 'text/javascript'
     newScript.onload = () => {
-      resolve()
+      resolve({message: `${src} loaded`})
     }
     newScript.src = src
     headTag.appendChild(newScript)
