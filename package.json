@@ -1,9 +1,10 @@
 {
   "name": "mingutils",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "MINi Good Utils",
   "keywords": [
-    "utils", "JavaScript"
+    "utils",
+    "JavaScript"
   ],
   "main": "./index.js",
   "repository": {
