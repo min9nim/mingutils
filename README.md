@@ -47,8 +47,9 @@ getQueryParams(window.location.href)
 <br>
 
 ### queryObjToStr
+
 ```js
-queryObjToStr({a:1, b:2}) // 'a=1&b=2'
+queryObjToStr({a: 1, b: 2}) // 'a=1&b=2'
 ```
 
 <br>
@@ -269,16 +270,42 @@ const str = 'hello [world]'
 escapeRegExp(str) // hello \[world\]
 ```
 
-
 <br>
 
 ### hasProps
 
 ```javascript
-const obj = { a: 1, b: 2, c: 3 }
-hasProps(['a', 'b', 'c'])(obj)  // true
+const obj = {a: 1, b: 2, c: 3}
+hasProps(['a', 'b', 'c'])(obj) // true
 hasProps(['a', 'b'])(obj) // true
 hasProps(['c'])(obj) // true
-hasProps(['a', 'b', 'd'])(obj)  // false
-hasProps(['d'])(obj)  // false
+hasProps(['a', 'b', 'd'])(obj) // false
+hasProps(['d'])(obj) // false
+```
+
+<br/>
+
+### oneOf
+
+```js
+import {oneOf} from '@madup-inc/utils'
+
+oneOf([[true, 2]]) // 2
+oneOf([
+  [false, 1],
+  [false, 2],
+  [true, 3],
+]) // 3
+oneOf([
+  [false, 1],
+  [true, 2],
+]) // 2
+oneOf([[false, 1]]) // undefined
+oneOf([[false, 1]], 'zzz') // 'zzz'
+
+// Lazy evaluation
+oneOf([() => true, 1]) // 1
+oneOf([true, () => 2]) // 2
+oneOf([() => true, () => 3]) // 3
+oneOf([false, 1], () => 4) // 4
 ```
