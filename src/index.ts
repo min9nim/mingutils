@@ -352,4 +352,15 @@ export const hasProps = (arr: string[]) => {
   return (obj: any): boolean => arr.every(prop => obj[prop])
 }
 
-export const oneOf = conditions => conditions.find(condition => condition[0])[1]
+type Fn<T> = () => T
+
+export function oneOf<T>(
+  items: Array<[boolean | Fn<boolean>, T | Fn<T>]>,
+  defaultValue?: T | Fn<T>
+): T | undefined {
+  const matched = items.find(item =>
+    typeof item[0] === "function" ? item[0]() : item[0]
+  )
+  const result = matched ? matched[1] : defaultValue
+  return typeof result === "function" ? (result as Fn<T>)() : result
+}

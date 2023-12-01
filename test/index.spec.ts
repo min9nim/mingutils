@@ -1,29 +1,29 @@
+import { expect } from 'chai'
+import { descend, identity } from 'ramda'
 import {
-  OR,
   AND,
-  getQueryParams,
+  OR,
   createRandomString,
-  numberWithCommas,
-  removeExt,
   delay,
-  timer,
-  removeTag,
   enableUrl,
-  getHostname,
-  getFileName,
   exclude,
+  getFileName,
+  getHostname,
+  getQueryParams,
   go,
+  hasProps,
+  highlight,
   isNotNil,
   nl2br,
-  sortKeys,
-  onlyOneInvoke,
-  highlight,
+  numberWithCommas,
   oneOf,
-  hasProps,
+  onlyOneInvoke,
   queryObjToStr,
+  removeExt,
+  removeTag,
+  sortKeys,
+  timer,
 } from '../src'
-import {expect} from 'chai'
-import {descend, identity} from 'ramda'
 
 describe('test', () => {
   it('OR', () => {
@@ -188,14 +188,14 @@ describe('test', () => {
     expect(
       oneOf([
         [false, 1],
-        [undefined, 2],
+        [Boolean(undefined), 2],
         [true, 3],
       ]),
     ).to.be.equal(3)
     expect(
       oneOf([
-        [null, 1],
-        [5, 2],
+        [Boolean(null), 1],
+        [Boolean(5), 2],
       ]),
     ).to.be.equal(2)
   })
