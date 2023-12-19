@@ -49,7 +49,7 @@ getQueryParams(window.location.href)
 ### queryObjToStr
 
 ```js
-queryObjToStr({a: 1, b: 2}) // 'a=1&b=2'
+queryObjToStr({ a: 1, b: 2 }) // 'a=1&b=2'
 ```
 
 <br>
@@ -57,7 +57,7 @@ queryObjToStr({a: 1, b: 2}) // 'a=1&b=2'
 ### setQueryParams
 
 ```js
-setQueryParams({id: 123, value: 'blabla'}) // window.location.href will be 'https://blabla.com?id=123&value=blabla'
+setQueryParams({ id: 123, value: 'blabla' }) // window.location.href will be 'https://blabla.com?id=123&value=blabla'
 ```
 
 <br>
@@ -230,9 +230,9 @@ console.log(jQuery().jquery) // "3.4.1"
 ### sortKeys
 
 ```javascript
-import {descend, identity} from 'ramda'
+import { descend, identity } from 'ramda'
 
-const obj = {b: 1, a: 1, c: 1}
+const obj = { b: 1, a: 1, c: 1 }
 const sorted = sortKeys(obj) // {a: 1, b: 1, c: 1}
 const reversed = sortKeys(obj, (a, b) => (a < b ? 1 : -1)) // {c: 1, b: 1, a: 1}
 ```
@@ -275,7 +275,7 @@ escapeRegExp(str) // hello \[world\]
 ### hasProps
 
 ```javascript
-const obj = {a: 1, b: 2, c: 3}
+const obj = { a: 1, b: 2, c: 3 }
 hasProps(['a', 'b', 'c'])(obj) // true
 hasProps(['a', 'b'])(obj) // true
 hasProps(['c'])(obj) // true
@@ -288,7 +288,7 @@ hasProps(['d'])(obj) // false
 ### oneOf
 
 ```js
-import {oneOf} from '@madup-inc/utils'
+import { oneOf } from '@madup-inc/utils'
 
 oneOf([[true, 2]]) // 2
 oneOf([
@@ -308,4 +308,53 @@ oneOf([() => true, 1]) // 1
 oneOf([true, () => 2]) // 2
 oneOf([() => true, () => 3]) // 3
 oneOf([false, 1], () => 4) // 4
+```
+
+<br/>
+
+### camelToKabab
+
+```js
+camelToKabab('helloWorld') // 'hello-world'
+camelToKabab('camel2Kabab') // 'camel2-kabab'
+camelToKabab('koreaArmyTrainingCenterK2') // 'korea-army-training-center-k2'
+camelToKabab('hello-world') // 'hello-world'
+camelToKabab('hello_world') // 'hello_world'
+camelToKabab('hello-World') // 'hello-World'
+```
+
+<br/>
+
+### classNames
+
+```js
+classNames({ a: true, b: false }) // 'a'
+classNames({ a: true, b: false }, { c: true, d: true }) // 'a c d'
+classNames('aa', 'bb') // 'aa bb'
+classNames('aa bb', 'cc') // 'aa bb cc'
+classNames('aa bb', 'cc', 'dd ee') // 'aa bb cc dd ee'
+classNames('aa', undefined, 'cc') // 'aa cc'
+classNames('aa', null, 'cc') // 'aa cc'
+
+classNames('cc', { a: true, b: false }) // 'cc a'
+classNames('xx', { a: true, b: false }, 'vv') // 'xx a vv'
+classNames({ a: false, b: false })) // undefined
+```
+
+<br/>
+
+### classNames
+
+```js
+clsNms({ a: true, b: false }) // 'a'
+clsNms({ a: true, b: false }, { c: true, d: true }) // 'a c d'
+clsNms('aa', 'bb') // 'aa bb'
+clsNms('aa', undefined, 'cc') // 'aa cc'
+clsNms('aa', null, 'cc') // 'aa cc'
+
+clsNms('cc', { a: true, b: false }) // 'cc a'
+clsNms('xx', { a: true, b: false }, 'vv') // 'xx a vv'
+clsNms({ a: false, b: false })).toEqual(undefined)
+clsNms('visible', { hasContent: true }) // 'visible has-content'
+clsNms('hasContent', { visible: true }) // 'has-content visible'
 ```
