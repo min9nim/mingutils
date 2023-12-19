@@ -343,7 +343,7 @@ classNames({ a: false, b: false })) // undefined
 
 <br/>
 
-### classNames
+### clsNms
 
 ```js
 clsNms({ a: true, b: false }) // 'a'
@@ -354,7 +354,7 @@ clsNms('aa', null, 'cc') // 'aa cc'
 
 clsNms('cc', { a: true, b: false }) // 'cc a'
 clsNms('xx', { a: true, b: false }, 'vv') // 'xx a vv'
-clsNms({ a: false, b: false })).toEqual(undefined)
+clsNms({ a: false, b: false }) // undefined
 clsNms('visible', { hasContent: true }) // 'visible has-content'
 clsNms('hasContent', { visible: true }) // 'has-content visible'
 ```
