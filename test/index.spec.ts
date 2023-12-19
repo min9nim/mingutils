@@ -218,56 +218,56 @@ describe('test', () => {
 })
 
 describe('clsNms', () => {
-  test('working similar class-names', () => {
-    expect(clsNms({ a: true, b: false })).toEqual('a')
-    expect(clsNms({ a: true, b: false }, { c: true, d: true })).toEqual('a c d')
-    expect(clsNms('aa', 'bb')).toEqual('aa bb')
-    expect(clsNms('aa', undefined, 'cc')).toEqual('aa cc')
-    expect(clsNms('aa', null, 'cc')).toEqual('aa cc')
+  it('working similar class-names', () => {
+    expect(clsNms({ a: true, b: false })).to.be.equal('a')
+    expect(clsNms({ a: true, b: false }, { c: true, d: true })).to.be.equal('a c d')
+    expect(clsNms('aa', 'bb')).to.be.equal('aa bb')
+    expect(clsNms('aa', undefined, 'cc')).to.be.equal('aa cc')
+    expect(clsNms('aa', null, 'cc')).to.be.equal('aa cc')
 
-    expect(clsNms('cc', { a: true, b: false })).toEqual('cc a')
-    expect(clsNms('xx', { a: true, b: false }, 'vv')).toEqual('xx a vv')
-    expect(clsNms({ a: false, b: false })).toEqual(undefined)
+    expect(clsNms('cc', { a: true, b: false })).to.be.equal('cc a')
+    expect(clsNms('xx', { a: true, b: false }, 'vv')).to.be.equal('xx a vv')
+    expect(clsNms({ a: false, b: false })).to.be.equal(undefined)
   })
-  test('use kabab case', () => {
-    expect(clsNms('visible', { hasContent: true })).toEqual(
+  it('use kabab case', () => {
+    expect(clsNms('visible', { hasContent: true })).to.be.equal(
       'visible has-content',
     )
-    expect(clsNms('hasContent', { visible: true })).toEqual(
+    expect(clsNms('hasContent', { visible: true })).to.be.equal(
       'has-content visible',
     )
   })
 })
 
 describe('class-names', () => {
-  test('조건에 따라 클레스 문지열을 생성한다.', () => {
-    expect(classNames({ a: true, b: false })).toEqual('a')
-    expect(classNames({ a: true, b: false }, { c: true, d: true })).toEqual(
+  it('조건에 따라 클레스 문지열을 생성한다.', () => {
+    expect(classNames({ a: true, b: false })).to.be.equal('a')
+    expect(classNames({ a: true, b: false }, { c: true, d: true })).to.be.equal(
       'a c d',
     )
-    expect(classNames('aa', 'bb')).toEqual('aa bb')
-    expect(classNames('aa bb', 'cc')).toEqual('aa bb cc')
-    expect(classNames('aa bb', 'cc', 'dd ee')).toEqual('aa bb cc dd ee')
-    expect(classNames('aa', undefined, 'cc')).toEqual('aa cc')
-    expect(classNames('aa', null, 'cc')).toEqual('aa cc')
+    expect(classNames('aa', 'bb')).to.be.equal('aa bb')
+    expect(classNames('aa bb', 'cc')).to.be.equal('aa bb cc')
+    expect(classNames('aa bb', 'cc', 'dd ee')).to.be.equal('aa bb cc dd ee')
+    expect(classNames('aa', undefined, 'cc')).to.be.equal('aa cc')
+    expect(classNames('aa', null, 'cc')).to.be.equal('aa cc')
 
-    expect(classNames('cc', { a: true, b: false })).toEqual('cc a')
-    expect(classNames('xx', { a: true, b: false }, 'vv')).toEqual('xx a vv')
-    expect(classNames({ a: false, b: false })).toEqual(undefined)
+    expect(classNames('cc', { a: true, b: false })).to.be.equal('cc a')
+    expect(classNames('xx', { a: true, b: false }, 'vv')).to.be.equal('xx a vv')
+    expect(classNames({ a: false, b: false })).to.be.equal(undefined)
   })
 })
 
 describe('camel-to-kabab', () => {
-  test('input:camel, output:kabab', () => {
-    expect(camelToKabab('helloWorld')).toEqual('hello-world')
-    expect(camelToKabab('camel2Kabab')).toEqual('camel2-kabab')
-    expect(camelToKabab('koreaArmyTrainingCenterK2')).toEqual(
+  it('input:camel, output:kabab', () => {
+    expect(camelToKabab('helloWorld')).to.be.equal('hello-world')
+    expect(camelToKabab('camel2Kabab')).to.be.equal('camel2-kabab')
+    expect(camelToKabab('koreaArmyTrainingCenterK2')).to.be.equal(
       'korea-army-training-center-k2',
     )
   })
-  test('if input value is not camelcase then return no change', () => {
-    expect(camelToKabab('hello-world')).toEqual('hello-world')
-    expect(camelToKabab('hello_world')).toEqual('hello_world')
-    expect(camelToKabab('hello-World')).toEqual('hello-World')
+  it('if input value is not camelcase then return no change', () => {
+    expect(camelToKabab('hello-world')).to.be.equal('hello-world')
+    expect(camelToKabab('hello_world')).to.be.equal('hello_world')
+    expect(camelToKabab('hello-World')).to.be.equal('hello-World')
   })
 })
