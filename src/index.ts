@@ -36,10 +36,7 @@ export const AND = (pred1, pred2) => {
   return value => and(pred1(value), pred2(value))
 }
 
-export const exclude = pipe(
-  complement,
-  filter,
-)
+export const exclude = pipe(complement, filter)
 
 export const isNotNil = complement(isNil)
 
@@ -99,10 +96,7 @@ export const indexMap = (...args) => {
 
 export const idEqual = propEq('_id')
 
-export const findById = pipe(
-  idEqual,
-  find,
-)
+export const findById = pipe(idEqual, find)
 
 export const updateBy = curry((pred, tobe) => {
   return list => {
@@ -153,7 +147,7 @@ export const forceFileDownload = (blob, name: string) => {
   link.click()
 }
 
-export const download = async ({uri, name}) => {
+export const download = async ({ uri, name }) => {
   const response = await fetch(uri)
   const blob = await response.blob()
   forceFileDownload(blob, name)
@@ -240,7 +234,8 @@ export const nl2br = (str: string) => {
 export const createRandomString = (length = 5): string => {
   let text = ''
   // noinspection SpellCheckingInspection
-  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_'
+  const possible =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_'
 
   Array.from(Array(length)).forEach(() => {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
@@ -263,19 +258,20 @@ export const setQueryParams = paramObj => {
   window.history.pushState({}, '', '?' + queryObjToStr(paramObj))
 }
 
-export const queryObjToStr = (paramObj: any): string => Object.entries(paramObj)
-  .map(([key, value]) => {
-    if(isNil(value)){
-      return
-    }
-    let valueStr = value
-    if (Array.isArray(value)) {
-      valueStr = value.join(',')
-    }
-    return key + '=' + valueStr
-  })
-  .filter(isNotNil)
-  .join('&')
+export const queryObjToStr = (paramObj: any): string =>
+  Object.entries(paramObj)
+    .map(([key, value]) => {
+      if (isNil(value)) {
+        return
+      }
+      let valueStr = value
+      if (Array.isArray(value)) {
+        valueStr = value.join(',')
+      }
+      return key + '=' + valueStr
+    })
+    .filter(isNotNil)
+    .join('&')
 
 export const delay = (fn, ms: number) => {
   return new Promise(resolve => {
@@ -300,7 +296,8 @@ export const enableUrl = (str: string): string => {
   if (!str) {
     return ''
   }
-  const isUrl = /((?:http|https?|ftps?|sftp):\/\/(?:[a-z0-9-]+\.)+[a-z0-9]{2,4}\S*)/gi
+  const isUrl =
+    /((?:http|https?|ftps?|sftp):\/\/(?:[a-z0-9-]+\.)+[a-z0-9]{2,4}\S*)/gi
   if (isUrl.test(str)) {
     return str.replace(isUrl, '<a href="$1">$1</a>')
   }
@@ -317,7 +314,7 @@ export const loadJs = (src: string) => {
     const newScript = document.createElement('script')
     newScript.type = 'text/javascript'
     newScript.onload = () => {
-      resolve({message: `${src} loaded`})
+      resolve({ message: `${src} loaded` })
     }
     newScript.src = src
     headTag.appendChild(newScript)
@@ -356,11 +353,62 @@ type Fn<T> = () => T
 
 export function oneOf<T>(
   items: Array<[boolean | Fn<boolean>, T | Fn<T>]>,
-  defaultValue?: T | Fn<T>
+  defaultValue?: T | Fn<T>,
 ): T | undefined {
   const matched = items.find(item =>
-    typeof item[0] === "function" ? item[0]() : item[0]
+    typeof item[0] === 'function' ? item[0]() : item[0],
   )
   const result = matched ? matched[1] : defaultValue
-  return typeof result === "function" ? (result as Fn<T>)() : result
+  return typeof result === 'function' ? (result as Fn<T>)() : result
+}
+
+export const textFromClipboard = async () => {
+  const str = await navigator.clipboard.readText().catch(err => {
+    const msg = 'Failed to read clipboard contents: '
+    console.error(msg, err)
+  })
+  if (!str) {
+    throw Error('No text in clipboard')
+  }
+  return str.trim()
+}
+
+export function debounce(func, timeout = 300) {
+  let timer
+  return (...args) => {
+    clearTimeout(timer)
+    timer = setTimeout(() => func(...args), timeout)
+  }
+}
+
+export const classNames = (...params: any[]): string => {
+  const result = params.reduce((acc, value) => {
+    if (!value) {
+      return acc
+    }
+    if (typeof value === 'boolean') {
+      throw Error('Boolean type is not acceptable')
+    }
+    if (typeof value === 'string') {
+      return acc + ' ' + value
+    }
+    const classes = Object.entries(value).reduce(
+      (acc, [key, value]) => acc + (value ? ' ' + key : ''),
+      '',
+    )
+    return acc + classes
+  }, '')
+
+  return result ? result.trim() : undefined
+}
+
+export const camelToKabab = (value: string) =>
+  value.replace(
+    /[a-z|0-9][A-Z][a-z|0-9]/g,
+    match => match[0] + '-' + match.slice(1).toLowerCase(),
+  )
+
+export const clsNms = (...params: any[]): string => {
+  const classString = classNames(...params)
+  return classString ? camelToKabab(classString) : classString
 }

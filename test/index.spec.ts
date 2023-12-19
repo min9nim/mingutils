@@ -3,6 +3,9 @@ import { descend, identity } from 'ramda'
 import {
   AND,
   OR,
+  camelToKabab,
+  classNames,
+  clsNms,
   createRandomString,
   delay,
   enableUrl,
@@ -141,13 +144,19 @@ describe('test', () => {
   })
 
   it('sortKeys', () => {
-    const obj = {b: 1, a: 1, c: 1}
+    const obj = { b: 1, a: 1, c: 1 }
     const sorted = sortKeys(obj)
-    expect(Object.keys(sorted)).to.be.deep.equal(Object.keys({a: 1, b: 1, c: 1}))
+    expect(Object.keys(sorted)).to.be.deep.equal(
+      Object.keys({ a: 1, b: 1, c: 1 }),
+    )
     const reversed = sortKeys(obj, descend(identity))
-    expect(Object.keys(reversed)).to.be.deep.equal(Object.keys({c: 1, b: 1, a: 1}))
+    expect(Object.keys(reversed)).to.be.deep.equal(
+      Object.keys({ c: 1, b: 1, a: 1 }),
+    )
     const reversed2 = sortKeys(obj, (a, b) => (a < b ? 1 : -1))
-    expect(Object.keys(reversed2)).to.be.deep.equal(Object.keys({c: 1, b: 1, a: 1}))
+    expect(Object.keys(reversed2)).to.be.deep.equal(
+      Object.keys({ c: 1, b: 1, a: 1 }),
+    )
   })
   it('onlyOneInvoke', () => {
     let cnt = 0
@@ -165,9 +174,9 @@ describe('test', () => {
   })
   it('getHostname', () => {
     expect(getHostname('https://naver.com')).to.be.equal('naver.com')
-    expect(getHostname('https://news.v.daum.net/v/20200613000613325')).to.be.equal(
-      'news.v.daum.net',
-    )
+    expect(
+      getHostname('https://news.v.daum.net/v/20200613000613325'),
+    ).to.be.equal('news.v.daum.net')
   })
   it('hasProps', () => {
     const obj = { a: 1, b: 2, c: 3 }
@@ -178,9 +187,9 @@ describe('test', () => {
     expect(hasProps(['d'])(obj)).to.equal(false)
   })
   it('queryObjToStr', () => {
-    expect(queryObjToStr({a:1, b:2})).to.be.equal('a=1&b=2')
-    expect(queryObjToStr({a:1, b: undefined})).to.be.equal('a=1')
-    expect(queryObjToStr({a:1, b: ''})).to.be.equal('a=1&b=')
+    expect(queryObjToStr({ a: 1, b: 2 })).to.be.equal('a=1&b=2')
+    expect(queryObjToStr({ a: 1, b: undefined })).to.be.equal('a=1')
+    expect(queryObjToStr({ a: 1, b: '' })).to.be.equal('a=1&b=')
   })
 
   it('oneOf', () => {
@@ -205,5 +214,60 @@ describe('test', () => {
         [() => Boolean(5), () => 20],
       ]),
     ).to.be.equal(20)
+  })
+})
+
+describe('clsNms', () => {
+  test('working similar class-names', () => {
+    expect(clsNms({ a: true, b: false })).toEqual('a')
+    expect(clsNms({ a: true, b: false }, { c: true, d: true })).toEqual('a c d')
+    expect(clsNms('aa', 'bb')).toEqual('aa bb')
+    expect(clsNms('aa', undefined, 'cc')).toEqual('aa cc')
+    expect(clsNms('aa', null, 'cc')).toEqual('aa cc')
+
+    expect(clsNms('cc', { a: true, b: false })).toEqual('cc a')
+    expect(clsNms('xx', { a: true, b: false }, 'vv')).toEqual('xx a vv')
+    expect(clsNms({ a: false, b: false })).toEqual(undefined)
+  })
+  test('use kabab case', () => {
+    expect(clsNms('visible', { hasContent: true })).toEqual(
+      'visible has-content',
+    )
+    expect(clsNms('hasContent', { visible: true })).toEqual(
+      'has-content visible',
+    )
+  })
+})
+
+describe('class-names', () => {
+  test('조건에 따라 클레스 문지열을 생성한다.', () => {
+    expect(classNames({ a: true, b: false })).toEqual('a')
+    expect(classNames({ a: true, b: false }, { c: true, d: true })).toEqual(
+      'a c d',
+    )
+    expect(classNames('aa', 'bb')).toEqual('aa bb')
+    expect(classNames('aa bb', 'cc')).toEqual('aa bb cc')
+    expect(classNames('aa bb', 'cc', 'dd ee')).toEqual('aa bb cc dd ee')
+    expect(classNames('aa', undefined, 'cc')).toEqual('aa cc')
+    expect(classNames('aa', null, 'cc')).toEqual('aa cc')
+
+    expect(classNames('cc', { a: true, b: false })).toEqual('cc a')
+    expect(classNames('xx', { a: true, b: false }, 'vv')).toEqual('xx a vv')
+    expect(classNames({ a: false, b: false })).toEqual(undefined)
+  })
+})
+
+describe('camel-to-kabab', () => {
+  test('input:camel, output:kabab', () => {
+    expect(camelToKabab('helloWorld')).toEqual('hello-world')
+    expect(camelToKabab('camel2Kabab')).toEqual('camel2-kabab')
+    expect(camelToKabab('koreaArmyTrainingCenterK2')).toEqual(
+      'korea-army-training-center-k2',
+    )
+  })
+  test('if input value is not camelcase then return no change', () => {
+    expect(camelToKabab('hello-world')).toEqual('hello-world')
+    expect(camelToKabab('hello_world')).toEqual('hello_world')
+    expect(camelToKabab('hello-World')).toEqual('hello-World')
   })
 })
