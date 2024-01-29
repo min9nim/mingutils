@@ -83,6 +83,7 @@ numberWithCommas(123456) // 123,456
 ```javascript
 const str = 'hello google http://google.com'
 enableUrl(str) // hello google <a href="http://google.com">http://google.com</a>
+enableUrl(str, '_blank') // hello google <a href="http://google.com" target="_blank">http://google.com</a>
 ```
 
 <br>
