@@ -114,6 +114,9 @@ describe('test', () => {
     expect(enableUrl(str)).to.be.equal(
       'hello google <a href="http://google.com">http://google.com</a>',
     )
+    expect(enableUrl(str, '_blank')).to.be.equal(
+      'hello google <a href="http://google.com" target="_blank">http://google.com</a>',
+    )
   })
 
   it('removeExt', () => {
@@ -220,7 +223,9 @@ describe('test', () => {
 describe('clsNms', () => {
   it('working similar class-names', () => {
     expect(clsNms({ a: true, b: false })).to.be.equal('a')
-    expect(clsNms({ a: true, b: false }, { c: true, d: true })).to.be.equal('a c d')
+    expect(clsNms({ a: true, b: false }, { c: true, d: true })).to.be.equal(
+      'a c d',
+    )
     expect(clsNms('aa', 'bb')).to.be.equal('aa bb')
     expect(clsNms('aa', undefined, 'cc')).to.be.equal('aa cc')
     expect(clsNms('aa', null, 'cc')).to.be.equal('aa cc')

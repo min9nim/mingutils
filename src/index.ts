@@ -292,18 +292,26 @@ export const numberWithCommas = (num: number) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
-export const enableUrl = (str: string): string => {
+export const enableUrl = (str: string, target?: string): string => {
   if (!str) {
     return ''
   }
   const isUrl =
     /((?:http|https?|ftps?|sftp):\/\/(?:[a-z0-9-]+\.)+[a-z0-9]{2,4}\S*)/gi
   if (isUrl.test(str)) {
-    return str.replace(isUrl, '<a href="$1">$1</a>')
+    return str.replace(
+      isUrl,
+      target ? `<a href="$1" target="${target}">$1</a>` : '<a href="$1">$1</a>',
+    )
   }
   const wwwStart = /(www\.(?:[a-z0-9-]+\.)+[a-z0-9]{2,4}\S*)/gi
   if (wwwStart.test(str)) {
-    return str.replace(wwwStart, '<a href="http://$1">$1</a>')
+    return str.replace(
+      wwwStart,
+      target
+        ? `<a href="http://$1" target="${target}">$1</a>`
+        : '<a href="http://$1">$1</a>',
+    )
   }
   return str
 }
